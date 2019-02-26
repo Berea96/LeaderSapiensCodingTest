@@ -116,8 +116,8 @@ class ArrayAB {
         System.out.println();
     }
 
-    public void getAnB() {
-        ArrayList<Integer> aMinB = new ArrayList<>();
+    public ArrayList<Integer> getAnB() {
+        ArrayList<Integer> aNb = new ArrayList<>();
         int check = 0;
         for(int a : this.a) {
             for(int b : this.b) {
@@ -128,24 +128,26 @@ class ArrayAB {
                 }
             }
             if(check != 0) {
-                aMinB.add(a);
+                aNb.add(a);
                 check = 0;
             }
         }
 
         System.out.println("A, B의 교집합");
-        for(Integer i : aMinB) {
+        for(Integer i : aNb) {
             System.out.print(i + " ");
         }
         System.out.println();
+
+        return aNb;
     }
 
-    public void getAplusB() {
+    public ArrayList<Integer> getAplusB() {
         ArrayList<Integer> aPlusB = new ArrayList<>();
         int check = 1;
-        for(int i : this.a)
-            aPlusB.add(i);
-        for(int i : aPlusB) {
+        for(int a : this.a)
+            aPlusB.add(a);
+        for(int i : this.a) {
             for(int b : this.b) {
                 if(i != b) check = 1;
                 else {
@@ -164,9 +166,13 @@ class ArrayAB {
             System.out.print(i + " ");
         }
         System.out.println();
+
+        return aPlusB;
     }
 
     public void getAnBminusAplusB() {
+        ArrayList<Integer> aNB = getAnB();
+        ArrayList<Integer> aPlusB = getAplusB();
 
     }
 
