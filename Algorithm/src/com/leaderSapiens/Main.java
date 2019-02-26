@@ -85,21 +85,86 @@ class ArrayAB {
             }
         }
 
+        System.out.println("A - B의 차집합");
         for(Integer i : aMinB) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
     public void getBminusA() {
+        ArrayList<Integer> bMinA = new ArrayList<>();
+        int check = 0;
+        for(int b : this.b) {
+            for(int a : this.a) {
+                if(b != a) check = 0;
+                else {
+                    check = 1;
+                    break;
+                }
+            }
+            if(check == 0) {
+                bMinA.add(b);
+                check = 0;
+            }
+        }
 
+        System.out.println("B - A의 차집합");
+        for(Integer i : bMinA) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
     public void getAnB() {
+        ArrayList<Integer> aMinB = new ArrayList<>();
+        int check = 0;
+        for(int a : this.a) {
+            for(int b : this.b) {
+                if(a != b) check = 0;
+                else {
+                    check = 1;
+                    break;
+                }
+            }
+            if(check != 0) {
+                aMinB.add(a);
+                check = 0;
+            }
+        }
 
+        System.out.println("A, B의 교집합");
+        for(Integer i : aMinB) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
     public void getAplusB() {
+        ArrayList<Integer> aPlusB = new ArrayList<>();
+        int check = 0;
+        for(int i : this.a)
+            aPlusB.add(i);
+        System.out.println(aPlusB);
+        for(int i : aPlusB) {
+            for(int b : this.b) {
+                if(i != b) check = 0;
+                else {
+                    check = 1;
+                    break;
+                }
+            }
+            if(check != 0) {
+                aPlusB.add(i);
+                check = 0;
+            }
+        }
 
+        System.out.println("A, B의 합집합");
+        for(Integer i : aPlusB) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
     public void getAnBminusAplusB() {
@@ -120,7 +185,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayAB arrayAB = new ArrayAB();
 
-        arrayAB.setA(new Integer[300]);
+        arrayAB.setA(new Integer[100]);
         arrayAB.setB(new Integer[100]);
 
         arrayAB.setA(arrayAB.setArray(arrayAB.getA()));
@@ -133,5 +198,8 @@ public class Main {
         arrayAB.printArray("B", arrayAB.getB());
 
         arrayAB.getAminusB();
+        arrayAB.getBminusA();
+        arrayAB.getAnB();
+        arrayAB.getAplusB();
     }
 }
