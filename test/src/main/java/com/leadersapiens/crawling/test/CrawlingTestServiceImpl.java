@@ -32,7 +32,6 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
     @Override
     public String crawlingFootballData(String leagueName) {
 
-
         String result = "";
         String url = "https://sports.news.naver.com/wfootball/record/index.nhn";
 
@@ -48,9 +47,11 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
                      .split(",\n" +
                              "        teamRecordBodyName:")[0];
 
-            createJsonObject(result);
+            JSONObject leagueData = createJsonObject(result, leagueName);
 
             System.out.println("야호 크롤링에 성공했습니다! 이건 정말 재미있습니다");
+
+            result = leagueData.toString();
         } catch (IOException e) {
             e.printStackTrace();
             result = "이런 실패했습니다ㅠㅠ";
@@ -59,7 +60,7 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         return result;
     }
 
-    public JSONObject createJsonObject(String footBallData) {
+    public JSONObject createJsonObject(String footBallData, String leagueName) {
 
         JSONObject footBallDataObj = new JSONObject(footBallData);
 
@@ -80,10 +81,29 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
             int get_point = data.getInt("gainPoint");
             int lose_point = data.getInt("loseGoal");
             int diff_point = data.getInt("goalGap");
+
+            JSONObject newData = new JSONObject();
+
+            newData.put("rank", rank);
+            newData.put("team", team);
+            newData.put("game_count", game_count);
+            newData.put("win_score", win_score);
+            newData.put("win", win);
+            newData.put("draw", draw);
+            newData.put("lose", lose);
+            newData.put("get_point", get_point);
+            newData.put("lose_point", lose_point);
+            newData.put("diff_point", diff_point);
+
+            System.out.println(newData);
+
+            league_rank.put(newData);
         }
 
-        System.out.println(footBallDataObj);
+        JSONObject leagueObj = new JSONObject();
+        leagueObj.put("league_rank", league_rank);
+        leagueObj.put("league_name", leagueName);
 
-        return null;
+        return leagueObj;
     }
 }
