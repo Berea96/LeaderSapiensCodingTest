@@ -142,15 +142,14 @@ class ArrayAB {
 
     public void getAplusB() {
         ArrayList<Integer> aPlusB = new ArrayList<>();
-        int check = 0;
+        int check = 1;
         for(int i : this.a)
             aPlusB.add(i);
-        System.out.println(aPlusB);
         for(int i : aPlusB) {
             for(int b : this.b) {
-                if(i != b) check = 0;
+                if(i != b) check = 1;
                 else {
-                    check = 1;
+                    check = 0;
                     break;
                 }
             }
