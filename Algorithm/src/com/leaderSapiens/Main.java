@@ -1,5 +1,6 @@
 package com.leaderSapiens;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class ArrayAB {
@@ -30,29 +31,33 @@ class ArrayAB {
         this.b = b;
     }
 
-    public Integer[] setArray(int size, Integer[] array) {
+    public Integer[] setArray(Integer[] array) {
         int count = 0;
 
         while(true) {
             int num = (int)((Math.random() * 300));
 
-            if(count == size) break;
-            else if(count != 0) {
-                for (int i = 0; i <= count; i++) {
-                    if (num == array[i]) break;
-                    else {
-                        array[count++] = num;
+            if(count == 0) array[count++] = num;
+            else if(count == array.length) break;
+            else {
+                int checkNum = 0;
+                for (int i = 0; i < count; i++) {
+                    if (num == array[i]) {
+                        checkNum = 0;
                         break;
                     }
+                    else {
+                        checkNum = 1;
+                    }
                 }
+                if(checkNum == 1) array[count++] = num;
             }
-            else array[count++] = num;
         }
-
         return array;
     }
 
-    public void printArray(Integer[] array) {
+    public void printArray(String target, Integer[] array) {
+        System.out.print("output " + target + " : ");
         for(Integer obj : array) {
             System.out.print(obj + " ");
         }
@@ -61,6 +66,44 @@ class ArrayAB {
 
     public void sortArray(Integer[] array) {
         Arrays.sort(array);
+    }
+
+    public void getAminusB() {
+        ArrayList<Integer> aMinB = new ArrayList<>();
+        int check = 0;
+        for(int a : this.a) {
+            for(int b : this.b) {
+                if(a != b) check = 0;
+                else {
+                    check = 1;
+                    break;
+                }
+            }
+            if(check == 0) {
+                aMinB.add(a);
+                check = 0;
+            }
+        }
+
+        for(Integer i : aMinB) {
+            System.out.print(i + " ");
+        }
+    }
+
+    public void getBminusA() {
+
+    }
+
+    public void getAnB() {
+
+    }
+
+    public void getAplusB() {
+
+    }
+
+    public void getAnBminusAplusB() {
+
     }
 
     @Override
@@ -80,13 +123,15 @@ public class Main {
         arrayAB.setA(new Integer[300]);
         arrayAB.setB(new Integer[100]);
 
-        arrayAB.setA(arrayAB.setArray(300, arrayAB.getA()));
-        arrayAB.setB(arrayAB.setArray(100, arrayAB.getB()));
+        arrayAB.setA(arrayAB.setArray(arrayAB.getA()));
+        arrayAB.setB(arrayAB.setArray(arrayAB.getB()));
 
         arrayAB.sortArray(arrayAB.getA());
         arrayAB.sortArray(arrayAB.getB());
 
-        arrayAB.printArray(arrayAB.getA());
-        arrayAB.printArray(arrayAB.getB());
+        arrayAB.printArray("A", arrayAB.getA());
+        arrayAB.printArray("B", arrayAB.getB());
+
+        arrayAB.getAminusB();
     }
 }
