@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+//크롤링의 비즈니스 로직을 담당하고있다
 @Service
 public class CrawlingTestServiceImpl implements CrawlingTestService {
+
+    //크롤링 연습하려고 만든 메소드임
     @Override
     public String crawlingData() {
 
@@ -29,6 +32,7 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         return football.html();
     }
 
+    //파라미터로 받아온 축구리그에 따라 정보를 긁어오는 메소드이다.
     @Override
     public String crawlingFootballData(String leagueName) {
 
@@ -41,9 +45,9 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
                     .data("tab", "team")
                     .get();
 
-            Elements body = doc.select("script");
+            Elements script = doc.select("script");
 
-            result = body.get(11).html().split("jsonTeamRecord:")[1]
+            result = script.get(11).html().split("jsonTeamRecord:")[1]
                      .split(",\n" +
                              "        teamRecordBodyName:")[0];
 
@@ -54,12 +58,13 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
             result = leagueData.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            result = "이런 실패했습니다ㅠㅠ";
+            result = leagueName + "리그 가져오기 실패했습니다ㅠㅠ";
         }
 
         return result;
     }
 
+    //Json 객체를 만들어 주는 메소드이다.
     public JSONObject createJsonObject(String footBallData, String leagueName) {
 
         JSONObject footBallDataObj = new JSONObject(footBallData);
@@ -67,37 +72,10 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         JSONArray regularTeamRecordList = footBallDataObj.getJSONArray("regularTeamRecordList");
         JSONArray league_rank = new JSONArray();
 
-        System.out.println(regularTeamRecordList.length());
-
         for(int i = 0; i < regularTeamRecordList.length(); i++) {
             JSONObject data = (JSONObject)regularTeamRecordList.get(i);
-            int rank = data.getInt("rank");
-            String team = data.getString("teamName");
-            int game_count = data.getInt("gameCount");
-            int win_score = data.getInt("gainPoint");
-            int win = data.getInt("won");
-            int draw = data.getInt("drawn");
-            int lose = data.getInt("lost");
-            int get_point = data.getInt("gainPoint");
-            int lose_point = data.getInt("loseGoal");
-            int diff_point = data.getInt("goalGap");
 
-            JSONObject newData = new JSONObject();
-
-            newData.put("rank", rank);
-            newData.put("team", team);
-            newData.put("game_count", game_count);
-            newData.put("win_score", win_score);
-            newData.put("win", win);
-            newData.put("draw", draw);
-            newData.put("lose", lose);
-            newData.put("get_point", get_point);
-            newData.put("lose_point", lose_point);
-            newData.put("diff_point", diff_point);
-
-            System.out.println(newData);
-
-            league_rank.put(newData);
+            league_rank.put(getDataList(data));
         }
 
         JSONObject leagueObj = new JSONObject();
@@ -105,5 +83,35 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         leagueObj.put("league_name", leagueName);
 
         return leagueObj;
+    }
+
+    //얻어온 데이터를 반복문을 통해 원하는 값들만 뽑고 가공하는 메소드
+    public JSONObject getDataList(JSONObject data) {
+
+        int rank = data.getInt("rank");
+        String team = data.getString("teamName");
+        int game_count = data.getInt("gameCount");
+        int win_score = data.getInt("gainPoint");
+        int win = data.getInt("won");
+        int draw = data.getInt("drawn");
+        int lose = data.getInt("lost");
+        int get_point = data.getInt("gainPoint");
+        int lose_point = data.getInt("loseGoal");
+        int diff_point = data.getInt("goalGap");
+
+        JSONObject newData = new JSONObject();
+
+        newData.put("rank", rank);
+        newData.put("team", team);
+        newData.put("game_count", game_count);
+        newData.put("win_score", win_score);
+        newData.put("win", win);
+        newData.put("draw", draw);
+        newData.put("lose", lose);
+        newData.put("get_point", get_point);
+        newData.put("lose_point", lose_point);
+        newData.put("diff_point", diff_point);
+
+        return newData;
     }
 }
