@@ -16,15 +16,13 @@ public class TestTelegram extends TelegramLongPollingBot {
         String text = update.getMessage().getText();
         System.out.println(text);
 
-        if(text.equals("hi")) {
-            SendMessage message = new SendMessage()
-                    .setChatId(update.getMessage().getChatId())
-                    .setText("hello");
-            try {
-                execute(message);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+        SendMessage message = new SendMessage()
+                .setChatId(update.getMessage().getChatId())
+                .setText(text);
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 
