@@ -2,6 +2,7 @@ package com.leaderSapiens;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 class ArrayAB {
     private Integer[] a;
@@ -85,11 +86,11 @@ class ArrayAB {
             }
         }
 
-        System.out.println("A - B의 차집합");
-        for(Integer i : aMinB) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+//        System.out.println("A - B의 차집합");
+//        for(Integer i : aMinB) {
+//            System.out.print(i + " ");
+//        }
+//        System.out.println();
     }
 
     public void getBminusA() {
@@ -109,11 +110,11 @@ class ArrayAB {
             }
         }
 
-        System.out.println("B - A의 차집합");
-        for(Integer i : bMinA) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+//        System.out.println("B - A의 차집합");
+//        for(Integer i : bMinA) {
+//            System.out.print(i + " ");
+//        }
+//        System.out.println();
     }
 
     public ArrayList<Integer> getAnB() {
@@ -133,11 +134,11 @@ class ArrayAB {
             }
         }
 
-        System.out.println("A, B의 교집합");
-        for(Integer i : aNb) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+//        System.out.println("A, B의 교집합");
+//        for(Integer i : aNb) {
+//            System.out.print(i + " ");
+//        }
+//        System.out.println();
 
         return aNb;
     }
@@ -147,8 +148,8 @@ class ArrayAB {
         int check = 1;
         for(int a : this.a)
             aPlusB.add(a);
-        for(int i : this.a) {
-            for(int b : this.b) {
+        for(int b : this.b) {
+            for(int i : this.a) {
                 if(i != b) check = 1;
                 else {
                     check = 0;
@@ -156,24 +157,46 @@ class ArrayAB {
                 }
             }
             if(check != 0) {
-                aPlusB.add(i);
+                aPlusB.add(b);
                 check = 0;
             }
         }
+        Collections.sort(aPlusB);
 
-        System.out.println("A, B의 합집합");
-        for(Integer i : aPlusB) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+//        System.out.println("A, B의 합집합");
+//        for(Integer i : aPlusB) {
+//            System.out.print(i + " ");
+//        }
+//        System.out.println();
 
         return aPlusB;
     }
 
     public void getAnBminusAplusB() {
-        ArrayList<Integer> aNB = getAnB();
+        ArrayList<Integer> aNb = getAnB();
         ArrayList<Integer> aPlusB = getAplusB();
 
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int count = 0;
+        for(int apb : aPlusB) {
+            for(int anb : aNb) {
+                if(anb != apb) count = 1;
+                else {
+                    count = 0;
+                    break;
+                }
+            }
+            if(count == 1) {
+                result.add(apb);
+            }
+        }
+
+//        System.out.println("합집합 - 교집합");
+//        for(int r : result) {
+//            System.out.print(r + " ");
+//        }
+//        System.out.println();
     }
 
     @Override
@@ -190,21 +213,27 @@ public class Main {
     public static void main(String[] args) {
         ArrayAB arrayAB = new ArrayAB();
 
-        arrayAB.setA(new Integer[100]);
-        arrayAB.setB(new Integer[100]);
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < 1000; i++) {
+            arrayAB.setA(new Integer[100]);
+            arrayAB.setB(new Integer[100]);
 
-        arrayAB.setA(arrayAB.setArray(arrayAB.getA()));
-        arrayAB.setB(arrayAB.setArray(arrayAB.getB()));
+            arrayAB.setA(arrayAB.setArray(arrayAB.getA()));
+            arrayAB.setB(arrayAB.setArray(arrayAB.getB()));
 
-        arrayAB.sortArray(arrayAB.getA());
-        arrayAB.sortArray(arrayAB.getB());
+            arrayAB.sortArray(arrayAB.getA());
+            arrayAB.sortArray(arrayAB.getB());
 
-        arrayAB.printArray("A", arrayAB.getA());
-        arrayAB.printArray("B", arrayAB.getB());
+            //arrayAB.printArray("A", arrayAB.getA());
+            //arrayAB.printArray("B", arrayAB.getB());
 
-        arrayAB.getAminusB();
-        arrayAB.getBminusA();
-        arrayAB.getAnB();
-        arrayAB.getAplusB();
+            arrayAB.getAminusB();
+            arrayAB.getBminusA();
+            arrayAB.getAnB();
+            arrayAB.getAplusB();
+            arrayAB.getAnBminusAplusB();
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
     }
 }
