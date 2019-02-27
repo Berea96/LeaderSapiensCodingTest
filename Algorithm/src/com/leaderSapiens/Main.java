@@ -1,5 +1,6 @@
 package com.leaderSapiens;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,6 +55,9 @@ class ArrayAB {
                 if(checkNum == 1) array[count++] = num;
             }
         }
+
+        Arrays.sort(array);
+
         return array;
     }
 
@@ -208,24 +212,51 @@ class ArrayAB {
     }
 }
 
+interface CurrentTime {
+    long currentTimePrint(String point);
+}
+
+interface DiffTime {
+    void diffTimePrint(Long start, Long end);
+}
+
 public class Main {
+
+//    public static long currentTimePrint(String point) {
+//        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss:SSS");
+//
+//        long current = System.currentTimeMillis();
+//        String currentTime = format1.format(System.currentTimeMillis());
+//        System.out.println(point + " " + currentTime);
+//
+//        return current;
+//    }
+
+//    public static void diffTimePrint(Long start, Long end) {
+//        System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
+//    }
 
     public static void main(String[] args) {
         ArrayAB arrayAB = new ArrayAB();
 
-        long start = System.currentTimeMillis();
+        //현재 시간을 얻어오는 메소드
+        //시작 시간을 가져옴
+        //Long start = arrayAB.currentTimePrint("시작 시간");
+        CurrentTime currentTime = point -> {
+            SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss:SSS");
+
+            long current = System.currentTimeMillis();
+            String now = format1.format(System.currentTimeMillis());
+            System.out.println(point + " " + now);
+
+            return current;
+        };
+
+        Long start = currentTime.currentTimePrint("시작 시간");
+
         for(int i = 0; i < 1000; i++) {
-            arrayAB.setA(new Integer[100]);
-            arrayAB.setB(new Integer[100]);
-
-            arrayAB.setA(arrayAB.setArray(arrayAB.getA()));
-            arrayAB.setB(arrayAB.setArray(arrayAB.getB()));
-
-            arrayAB.sortArray(arrayAB.getA());
-            arrayAB.sortArray(arrayAB.getB());
-
-            //arrayAB.printArray("A", arrayAB.getA());
-            //arrayAB.printArray("B", arrayAB.getB());
+            arrayAB.setA(arrayAB.setArray(new Integer[100]));
+            arrayAB.setB(arrayAB.setArray(new Integer[100]));
 
             arrayAB.getAminusB();
             arrayAB.getBminusA();
@@ -233,7 +264,22 @@ public class Main {
             arrayAB.getAplusB();
             arrayAB.getAnBminusAplusB();
         }
-        long end = System.currentTimeMillis();
-        System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
+
+        //배열 출력 메소드
+        //arrayAB.printArray("A", arrayAB.getA());
+        //arrayAB.printArray("B", arrayAB.getB());
+
+        //현재 시간을 얻어오는 메소드
+        //끝난 시간을 가져옴
+        //Long end = currentTimePrint("끝난 시간");
+        Long end = currentTime.currentTimePrint("끝난 시간");
+
+        //시작 시간과 끝난 시간의 차이를 구하는 메소드
+        //diffTimePrint(start, end);
+        DiffTime diffTime = (startTime, endTime) -> {
+            System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
+        };
+
+        diffTime.diffTimePrint(start, end);
     }
 }
