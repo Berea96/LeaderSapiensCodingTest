@@ -40,16 +40,11 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         String url = "https://sports.news.naver.com/wfootball/record/index.nhn";
 
         try {
-            Document doc = Jsoup.connect(url)
-                    .data("category", leagueName)
-                    .data("tab", "team")
-                    .get();
+            Document doc = connectJsoup(url, leagueName);
 
             Elements script = doc.select("script");
 
-            result = script.get(11).html().split("jsonTeamRecord:")[1]
-                     .split(",\n" +
-                             "        teamRecordBodyName:")[0];
+            result = splitData(script.get(11).html());
 
             JSONObject leagueData = createJsonObject(result, leagueName);
 
@@ -64,8 +59,22 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         return result;
     }
 
+    //매개변수의 leagueName과 url에 따라서 Document객체를 받아오는 메소드
+    private Document connectJsoup(String url, String leagueName) throws IOException {
+        return Jsoup.connect(url)
+                    .data("category", leagueName)
+                    .data("tab", "team")
+                    .get();
+    }
+
+    //가져온 script 문장들을 Json 형태로 쪼개주는 메소드
+    private String splitData(String html) {
+        return html.split("jsonTeamRecord:")[1]
+                   .split(",\n" + "        teamRecordBodyName:")[0];
+    }
+
     //Json 객체를 만들어 주는 메소드이다.
-    public JSONObject createJsonObject(String footBallData, String leagueName) {
+    private JSONObject createJsonObject(String footBallData, String leagueName) {
 
         JSONObject footBallDataObj = new JSONObject(footBallData);
 
@@ -78,6 +87,11 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
             league_rank.put(getDataList(data));
         }
 
+        return getCreateLeague(league_rank, leagueName);
+    }
+
+    //처리된 데이터들을 원하는 형태로 만들어주는 메소드
+    private JSONObject getCreateLeague(JSONArray league_rank, String leagueName) {
         JSONObject leagueObj = new JSONObject();
         leagueObj.put("league_rank", league_rank);
         leagueObj.put("league_name", leagueName);
@@ -85,32 +99,39 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         return leagueObj;
     }
 
-    //얻어온 데이터를 반복문을 통해 원하는 값들만 뽑고 가공하는 메소드
-    public JSONObject getDataList(JSONObject data) {
+    //얻어온 데이터를 반복문을 통해 원하는 값들만 뽑아내는 메소드
+    private JSONObject getDataList(JSONObject data) {
 
-        int rank = data.getInt("rank");
-        String team = data.getString("teamName");
-        int game_count = data.getInt("gameCount");
-        int win_score = data.getInt("gainPoint");
-        int win = data.getInt("won");
-        int draw = data.getInt("drawn");
-        int lose = data.getInt("lost");
-        int get_point = data.getInt("gainPoint");
-        int lose_point = data.getInt("loseGoal");
-        int diff_point = data.getInt("goalGap");
+        Crawling crawling = new Crawling();
 
+        crawling.setRank(data.getInt("rank"));
+        crawling.setTeam(data.getString("teamName"));
+        crawling.setGame_count(data.getInt("gameCount"));
+        crawling.setWin_score(data.getInt("gainPoint"));
+        crawling.setWin(data.getInt("won"));
+        crawling.setDraw(data.getInt("drawn"));
+        crawling.setLose(data.getInt("lost"));
+        crawling.setGet_point(data.getInt("gainPoint"));
+        crawling.setLose_point(data.getInt("loseGoal"));
+        crawling.setDiff_point(data.getInt("goalGap"));
+
+        return setDataList(crawling);
+    }
+
+    //뽑아낸 데이터를 JSONObject로 만들어주는 메소드
+    public JSONObject setDataList(Crawling crawling) {
         JSONObject newData = new JSONObject();
 
-        newData.put("rank", rank);
-        newData.put("team", team);
-        newData.put("game_count", game_count);
-        newData.put("win_score", win_score);
-        newData.put("win", win);
-        newData.put("draw", draw);
-        newData.put("lose", lose);
-        newData.put("get_point", get_point);
-        newData.put("lose_point", lose_point);
-        newData.put("diff_point", diff_point);
+        newData.put("rank", crawling.getRank());
+        newData.put("team", crawling.getTeam());
+        newData.put("game_count", crawling.getGame_count());
+        newData.put("win_score", crawling.getWin_score());
+        newData.put("win", crawling.getWin());
+        newData.put("draw", crawling.getDraw());
+        newData.put("lose", crawling.getLose());
+        newData.put("get_point", crawling.getGet_point());
+        newData.put("lose_point", crawling.getLose_point());
+        newData.put("diff_point", crawling.getDiff_point());
 
         return newData;
     }
