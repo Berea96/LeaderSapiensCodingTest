@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf5692d-631e-4bd9-9896-797e9623bb05" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/TestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/test/java/com/leadersapiens/crawling/test/TestApplicationTests.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,7 +102,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551252447282" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551252688674" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
