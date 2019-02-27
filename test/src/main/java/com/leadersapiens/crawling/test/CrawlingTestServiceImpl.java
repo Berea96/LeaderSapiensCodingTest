@@ -40,16 +40,11 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         String url = "https://sports.news.naver.com/wfootball/record/index.nhn";
 
         try {
-            Document doc = Jsoup.connect(url)
-                                .data("category", leagueName)
-                                .data("tab", "team")
-                                .get();
+            Document doc = connectJsoup(url, leagueName);
 
             Elements script = doc.select("script");
 
-            result = script.get(11).html().split("jsonTeamRecord:")[1]
-                     .split(",\n" +
-                             "        teamRecordBodyName:")[0];
+            result = splitData(script.get(11).html());
 
             JSONObject leagueData = createJsonObject(result, leagueName);
 
@@ -62,6 +57,20 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
         }
 
         return result;
+    }
+
+    //매개변수의 leagueName과 url에 따라서 Document객체를 받아오는 메소드
+    public Document connectJsoup(String url, String leagueName) throws IOException {
+        return Jsoup.connect(url)
+                .data("category", leagueName)
+                .data("tab", "team")
+                .get();
+    }
+
+    //가져온 script 문장들을 Json 형태로 쪼개주는 메소드
+    public String splitData(String html) {
+        return html.split("jsonTeamRecord:")[1]
+                   .split(",\n" + "        teamRecordBodyName:")[0];
     }
 
     //Json 객체를 만들어 주는 메소드이다.
@@ -78,6 +87,11 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
             league_rank.put(getDataList(data));
         }
 
+        return getCreateLeague(league_rank, leagueName);
+    }
+
+    //처리된 데이터들을 원하는 형태로 만들어주는 메소드
+    public JSONObject getCreateLeague(JSONArray league_rank, String leagueName) {
         JSONObject leagueObj = new JSONObject();
         leagueObj.put("league_rank", league_rank);
         leagueObj.put("league_name", leagueName);
