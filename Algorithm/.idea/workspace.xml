@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/leaderSapiens/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="254" column="21" lean-forward="true" selection-start-line="254" selection-start-column="21" selection-end-line="254" selection-end-column="33" />
+            <state relative-caret-position="310">
+              <caret line="233" column="61" lean-forward="true" selection-start-line="233" selection-start-column="61" selection-end-line="233" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,7 +89,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551231465790" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551233106524" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -140,7 +140,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22526000" />
+    <option name="totallyTimeSpent" value="24070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1740" y="23" width="1064" height="1002" extended-state="0" />
@@ -165,7 +165,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32855093" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32807216" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -190,8 +190,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/leaderSapiens/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="254" column="21" lean-forward="true" selection-start-line="254" selection-start-column="21" selection-end-line="254" selection-end-column="33" />
+        <state relative-caret-position="310">
+          <caret line="233" column="61" lean-forward="true" selection-start-line="233" selection-start-column="61" selection-end-line="233" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

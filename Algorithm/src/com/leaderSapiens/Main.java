@@ -33,6 +33,7 @@ class ArrayAB {
         this.b = b;
     }
 
+    //배열에 값을 랜덤으로 지정하는 메소드
     public Integer[] setArray(Integer[] array) {
         int count = 0;
 
@@ -61,6 +62,7 @@ class ArrayAB {
         return array;
     }
 
+    //배열을 순서대로 출력하는 메소드
     public void printArray(String target, Integer[] array) {
         System.out.print("output " + target + " : ");
         for(Integer obj : array) {
@@ -69,15 +71,12 @@ class ArrayAB {
         System.out.println();
     }
 
-    public void sortArray(Integer[] array) {
-        Arrays.sort(array);
-    }
-
-    public void getAminusB() {
+    //배열간 차집합을 구하는 메소드
+    public void getRelativeComplement(Integer[] array1, Integer[] array2) {
         ArrayList<Integer> aMinB = new ArrayList<>();
         int check = 0;
-        for(int a : this.a) {
-            for(int b : this.b) {
+        for(int a : array1) {
+            for(int b : array2) {
                 if(a != b) check = 0;
                 else {
                     check = 1;
@@ -89,40 +88,10 @@ class ArrayAB {
                 check = 0;
             }
         }
-
-//        System.out.println("A - B의 차집합");
-//        for(Integer i : aMinB) {
-//            System.out.print(i + " ");
-//        }
-//        System.out.println();
     }
 
-    public void getBminusA() {
-        ArrayList<Integer> bMinA = new ArrayList<>();
-        int check = 0;
-        for(int b : this.b) {
-            for(int a : this.a) {
-                if(b != a) check = 0;
-                else {
-                    check = 1;
-                    break;
-                }
-            }
-            if(check == 0) {
-                bMinA.add(b);
-                check = 0;
-            }
-        }
-
-//        System.out.println("B - A의 차집합");
-//        for(Integer i : bMinA) {
-//            System.out.print(i + " ");
-//        }
-//        System.out.println();
-    }
-
-    public ArrayList<Integer> getAnB() {
-        ArrayList<Integer> aNb = new ArrayList<>();
+    public ArrayList<Integer> getIntersection() {
+        ArrayList<Integer> intersection = new ArrayList<>();
         int check = 0;
         for(int a : this.a) {
             for(int b : this.b) {
@@ -133,7 +102,7 @@ class ArrayAB {
                 }
             }
             if(check != 0) {
-                aNb.add(a);
+                intersection.add(a);
                 check = 0;
             }
         }
@@ -144,14 +113,14 @@ class ArrayAB {
 //        }
 //        System.out.println();
 
-        return aNb;
+        return intersection;
     }
 
-    public ArrayList<Integer> getAplusB() {
-        ArrayList<Integer> aPlusB = new ArrayList<>();
+    public ArrayList<Integer> getUnion() {
+        ArrayList<Integer> union = new ArrayList<>();
         int check = 1;
         for(int a : this.a)
-            aPlusB.add(a);
+            union.add(a);
         for(int b : this.b) {
             for(int i : this.a) {
                 if(i != b) check = 1;
@@ -161,11 +130,12 @@ class ArrayAB {
                 }
             }
             if(check != 0) {
-                aPlusB.add(b);
+                union.add(b);
                 check = 0;
             }
         }
-        Collections.sort(aPlusB);
+
+        Collections.sort(union);
 
 //        System.out.println("A, B의 합집합");
 //        for(Integer i : aPlusB) {
@@ -173,18 +143,18 @@ class ArrayAB {
 //        }
 //        System.out.println();
 
-        return aPlusB;
+        return union;
     }
 
-    public void getAnBminusAplusB() {
-        ArrayList<Integer> aNb = getAnB();
-        ArrayList<Integer> aPlusB = getAplusB();
+    public void getSymmetricDifference() {
+        ArrayList<Integer> union = getUnion();
+        ArrayList<Integer> intersection = getIntersection();
 
         ArrayList<Integer> result = new ArrayList<>();
 
         int count = 0;
-        for(int apb : aPlusB) {
-            for(int anb : aNb) {
+        for(int apb : union) {
+            for(int anb : intersection) {
                 if(anb != apb) count = 1;
                 else {
                     count = 0;
@@ -222,6 +192,8 @@ interface DiffTime {
 
 public class Main {
 
+    //현재 시간을 가져오는 메소드이다.
+    //현재 람다식 사용으로 주석처리하였다.
 //    public static long currentTimePrint(String point) {
 //        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss:SSS");
 //
@@ -232,6 +204,8 @@ public class Main {
 //        return current;
 //    }
 
+    //시작 시간과 끝난 시간의 차이를 출력하는 메소드이다
+    //현재 람다식 사용으로 주석처리하였다.
 //    public static void diffTimePrint(Long start, Long end) {
 //        System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
 //    }
@@ -239,9 +213,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayAB arrayAB = new ArrayAB();
 
-        //현재 시간을 얻어오는 메소드
-        //시작 시간을 가져옴
-        //Long start = arrayAB.currentTimePrint("시작 시간");
+        //현재 시간을 얻어오는 인터페이스이다. 람다식으로 표현하였다.
         CurrentTime currentTime = point -> {
             SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss:SSS");
 
@@ -252,34 +224,39 @@ public class Main {
             return current;
         };
 
+        //현재 시간을 얻어오는 메소드
+        //시작 시간을 가져옴
+        //Long start = arrayAB.currentTimePrint("시작 시간");
         Long start = currentTime.currentTimePrint("시작 시간");
 
+        //실행 시간을 구하기위한 반복문
         for(int i = 0; i < 1000; i++) {
             arrayAB.setA(arrayAB.setArray(new Integer[100]));
             arrayAB.setB(arrayAB.setArray(new Integer[100]));
 
-            arrayAB.getAminusB();
-            arrayAB.getBminusA();
-            arrayAB.getAnB();
-            arrayAB.getAplusB();
-            arrayAB.getAnBminusAplusB();
+            arrayAB.getRelativeComplement(arrayAB.getA(), arrayAB.getB());
+            arrayAB.getRelativeComplement(arrayAB.getB(), arrayAB.getA());
+            arrayAB.getIntersection();
+            arrayAB.getUnion();
+            arrayAB.getSymmetricDifference();
         }
-
-        //배열 출력 메소드
-        //arrayAB.printArray("A", arrayAB.getA());
-        //arrayAB.printArray("B", arrayAB.getB());
 
         //현재 시간을 얻어오는 메소드
         //끝난 시간을 가져옴
         //Long end = currentTimePrint("끝난 시간");
         Long end = currentTime.currentTimePrint("끝난 시간");
 
-        //시작 시간과 끝난 시간의 차이를 구하는 메소드
-        //diffTimePrint(start, end);
+        //시작 시간과 끝난 시간의 차이를 구하는 인터페이스를 람더로 표현
         DiffTime diffTime = (startTime, endTime) -> {
             System.out.println("실행 시간 " + (end - start) / 1000.0 + "초");
         };
 
+        //시작 시간과 끝난 시간의 차이를 구하는 메소드
+        //diffTimePrint(start, end);
         diffTime.diffTimePrint(start, end);
+
+        //배열 출력 메소드
+        arrayAB.printArray("A", arrayAB.getA());
+        arrayAB.printArray("B", arrayAB.getB());
     }
 }
