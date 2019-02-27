@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf5692d-631e-4bd9-9896-797e9623bb05" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../test/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/leadersapiens/crawling/test/TestApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test/src/test/java/com/leadersapiens/crawling/test/TestApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../crawlingTest/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../crawlingTest/src/main/java/com/leadersapiens/crawling/test/CrawlingTestServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/leaderSapiens/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2815">
-              <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,7 +90,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551253110786" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551259976692" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -204,7 +192,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/leaderSapiens/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2815">
-          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
