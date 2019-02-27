@@ -69,7 +69,7 @@ class ArrayAB {
     }
 
     //배열간 차집합을 구하는 메소드
-    public void getRelativeComplement(Integer[] array1, Integer[] array2) {
+    public void getRelativeComplement(String who, Integer[] array1, Integer[] array2) {
         ArrayList<Integer> relativeComplement = new ArrayList<>();
         int check = 0;
         for(int a : array1) {
@@ -85,6 +85,8 @@ class ArrayAB {
                 check = 0;
             }
         }
+
+        //printSet(who, relativeComplement);
     }
 
     public ArrayList<Integer> getIntersection() {
@@ -104,42 +106,9 @@ class ArrayAB {
             }
         }
 
-        //intersection.stream().forEach(n -> System.out.print(n + " "));
-
-//        System.out.println("A, B의 교집합");
-//        for(Integer i : intersection) {
-//            System.out.print(i + " ");
-//        }
-//        System.out.println();
+        //printSet("A, B의 교집합", intersection);
 
         return intersection;
-    }
-
-    public void getSymmetricDifference() {
-        ArrayList<Integer> union = getUnion();
-        ArrayList<Integer> intersection = getIntersection();
-
-        ArrayList<Integer> result = new ArrayList<>();
-
-        int count = 0;
-        for(int apb : union) {
-            for(int anb : intersection) {
-                if(anb != apb) count = 1;
-                else {
-                    count = 0;
-                    break;
-                }
-            }
-            if(count == 1) {
-                result.add(apb);
-            }
-        }
-
-//        System.out.println("합집합 - 교집합");
-//        for(int r : result) {
-//            System.out.print(r + " ");
-//        }
-//        System.out.println();
     }
 
     public ArrayList<Integer> getUnion() {
@@ -160,18 +129,42 @@ class ArrayAB {
                 check = 0;
             }
         }
-//        for(int b : this.b) union.add(b);
-//        union = (ArrayList<Integer>)union.stream().distinct().collect(Collectors.toList());
 
         Collections.sort(union);
 
-//        System.out.println("A, B의 합집합");
-//        for(Integer i : union) {
-//            System.out.print(i + " ");
-//        }
-//        System.out.println();
+        printSet("A, B의 합집합", union);
 
         return union;
+    }
+
+    public void getSymmetricDifference() {
+        ArrayList<Integer> union = getUnion();
+        ArrayList<Integer> intersection = getIntersection();
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int count = 0;
+        for(int u : union) {
+            for(int i : intersection) {
+                if(i != u) count = 1;
+                else {
+                    count = 0;
+                    break;
+                }
+            }
+            if(count == 1) {
+                result.add(u);
+            }
+        }
+
+        printSet("합집합 - 교집합", result);
+    }
+
+    //집합들을 출력해주는 메소드이다.
+    private void printSet(String target, ArrayList<Integer> set) {
+        System.out.println(target);
+        set.stream().forEach(data -> System.out.print(data + " "));
+        System.out.println();
     }
 
     @Override
@@ -237,16 +230,16 @@ public class Main {
         Long start = currentTime.currentTimePrint("시작 시간");
 
         //실행 시간을 구하기위한 반복문
-        for (int i = 0; i < 1000; i++) {
+        //for (int i = 0; i < 1; i++) {
             arrayAB.setA(arrayAB.setArray(new Integer[100]));
             arrayAB.setB(arrayAB.setArray(new Integer[100]));
 
-            arrayAB.getRelativeComplement(arrayAB.getA(), arrayAB.getB());
-            arrayAB.getRelativeComplement(arrayAB.getB(), arrayAB.getA());
+            arrayAB.getRelativeComplement("A - B 차집합", arrayAB.getA(), arrayAB.getB());
+            arrayAB.getRelativeComplement("B - A 차집합", arrayAB.getB(), arrayAB.getA());
             arrayAB.getIntersection();
             arrayAB.getUnion();
             arrayAB.getSymmetricDifference();
-        }
+        //}
 
         //현재 시간을 얻어오는 메소드
         //끝난 시간을 가져옴
