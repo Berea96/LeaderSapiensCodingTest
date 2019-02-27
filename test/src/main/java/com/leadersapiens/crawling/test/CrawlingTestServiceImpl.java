@@ -41,9 +41,9 @@ public class CrawlingTestServiceImpl implements CrawlingTestService {
 
         try {
             Document doc = Jsoup.connect(url)
-                    .data("category", leagueName)
-                    .data("tab", "team")
-                    .get();
+                                .data("category", leagueName)
+                                .data("tab", "team")
+                                .get();
 
             Elements script = doc.select("script");
 
