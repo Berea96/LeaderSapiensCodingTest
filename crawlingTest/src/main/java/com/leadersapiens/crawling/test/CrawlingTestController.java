@@ -23,6 +23,7 @@ public class CrawlingTestController {
     @RequestMapping(value = "/getFootball", mehtod = RequestMethod.GET)
     public String crawlingFootball() {
 
+
         String result = "";
 
         result += service.crawlingFootballData("epl") + "\n";
@@ -34,7 +35,9 @@ public class CrawlingTestController {
 
     //테스트 url로 매핑한 메소드
     @ReuqestMapping(value = "/football/rank/{leagueName}", RequestMethod.GET)
-    public String crawlingFootball() {
+    public String crawlingFootball(@PathVariable String leagueName) {
+        String rank = service.crawlingFootballData(leagueName);
 
+        return rank;
     }
 }
