@@ -13,7 +13,11 @@ class ArrayAB {
     private ArrayList<Integer> union;
     private ArrayList<Integer> symmetricDifference;
 
-    public ArrayAB() {
+    private ArrayAB() {
+    }
+
+    public static ArrayAB getArrayAB() {
+        return new ArrayAB();
     }
 
     public Integer[] getA() {
@@ -104,6 +108,7 @@ class ArrayAB {
         else relativeComplementB = relativeComplement;
     }
 
+    //배열간 교집합을 구하는 메소드
     public void setIntersection() {
         intersection = new ArrayList<>();
         int check = 0;
@@ -122,6 +127,7 @@ class ArrayAB {
         }
     }
 
+    //배열간 합집합을 구하는 메소드
     public void setUnion() {
         union = new ArrayList<>();
         int check = 1;
@@ -144,6 +150,7 @@ class ArrayAB {
         Collections.sort(union);
     }
 
+    //배열간 대칭차집합을 구하는 메소드
     public void setSymmetricDifference(ArrayList<Integer> union, ArrayList<Integer> intersection) {
 
         symmetricDifference = new ArrayList<>();
@@ -214,7 +221,7 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-        ArrayAB arrayAB = new ArrayAB();
+        ArrayAB arrayAB = ArrayAB.getArrayAB();
 
         //현재 시간을 얻어오는 인터페이스이다. 람다식으로 표현하였다.
         CurrentTime currentTime = point -> {
