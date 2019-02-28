@@ -20,7 +20,7 @@ public class CrawlingTestController {
     }
 
     //본격적으로 축구리그 이름에 따라서 Json을 얻어오는 메소드
-    @RequestMapping(value = "/getFootball")
+    @RequestMapping(value = "/getFootball", mehtod = RequestMethod.GET)
     public String crawlingFootball() {
 
         String result = "";
@@ -30,5 +30,11 @@ public class CrawlingTestController {
         result += service.crawlingFootballData("bundesliga") + "\n";
 
         return result;
+    }
+
+    //테스트 url로 매핑한 메소드
+    @ReuqestMapping(value = "/football/rank/{leagueName}", RequestMethod.GET)
+    public String crawlingFootball() {
+
     }
 }
