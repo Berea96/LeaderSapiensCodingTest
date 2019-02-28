@@ -132,7 +132,7 @@ class ArrayAB {
 
         Collections.sort(union);
 
-        printSet("A, B의 합집합", union);
+        //printSet("A, B의 합집합", union);
 
         return union;
     }
@@ -230,7 +230,7 @@ public class Main {
         Long start = currentTime.currentTimePrint("시작 시간");
 
         //실행 시간을 구하기위한 반복문
-        //for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 1; i++) {
             arrayAB.setA(arrayAB.setArray(new Integer[100]));
             arrayAB.setB(arrayAB.setArray(new Integer[100]));
 
@@ -239,7 +239,7 @@ public class Main {
             arrayAB.getIntersection();
             arrayAB.getUnion();
             arrayAB.getSymmetricDifference();
-        //}
+        }
 
         //현재 시간을 얻어오는 메소드
         //끝난 시간을 가져옴
