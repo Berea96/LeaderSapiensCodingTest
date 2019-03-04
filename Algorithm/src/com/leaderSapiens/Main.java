@@ -13,11 +13,7 @@ class ArrayAB {
     private ArrayList<Integer> union;
     private ArrayList<Integer> symmetricDifference;
 
-    private ArrayAB() {
-    }
-
-    public static ArrayAB getArrayAB() {
-        return new ArrayAB();
+    public ArrayAB() {
     }
 
     public Integer[] getA() {
@@ -221,7 +217,7 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-        ArrayAB arrayAB = ArrayAB.getArrayAB();
+        ArrayAB arrayAB = new ArrayAB();
 
         //현재 시간을 얻어오는 인터페이스이다. 람다식으로 표현하였다.
         CurrentTime currentTime = point -> {
